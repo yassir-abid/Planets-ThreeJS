@@ -1,7 +1,9 @@
 include ./partials/header.pug
 
 main(class="content"
-    id="planet")
+    id="planet"
+    data-size= size
+    data-color= color)
     h1.content_title= title
     p.content__action
         a.content__link(href="./") Retour à l'accueil
