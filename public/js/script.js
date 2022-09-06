@@ -35978,6 +35978,7 @@ var Planet = /** @class */ (function () {
         this.redraw = this.redraw.bind(this);
     }
     Planet.prototype.draw = function () {
+        var _this = this;
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(45, this.calculScreenRatio(), 1, 1000);
         this.camera.position.z = 15;
@@ -35993,6 +35994,12 @@ var Planet = /** @class */ (function () {
         this.light.position.set(-50, 50, 50);
         this.scene.add(this.light);
         this.renderer.render(this.scene, this.camera);
+        window.addEventListener('resize', function () {
+            _this.renderer.setSize(window.innerWidth, window.innerHeight);
+            _this.camera.aspect = _this.calculScreenRatio();
+            // Updates the camera projection matrix must be called after any change of parameters
+            _this.camera.updateProjectionMatrix();
+        });
         this.redraw();
     };
     Planet.prototype.getTime = function () {

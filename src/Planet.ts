@@ -42,6 +42,14 @@ class Planet {
         this.scene.add(this.light);
 
         this.renderer.render(this.scene, this.camera);
+
+        window.addEventListener('resize', () => {
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+            this.camera.aspect = this.calculScreenRatio();
+            // Updates the camera projection matrix must be called after any change of parameters
+            this.camera.updateProjectionMatrix();
+        });
+
         this.redraw();
     }
 
