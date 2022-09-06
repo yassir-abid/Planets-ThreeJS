@@ -27,7 +27,7 @@ const controller = {
             }
         }
         const planet = new Planet(data);
-        response.send(planet);
+        response.render('planet', planet);
     },
 }
 
