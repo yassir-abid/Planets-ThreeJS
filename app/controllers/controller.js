@@ -28,10 +28,15 @@ const controller = {
                 size: 2,
                 texture: 'img/venus.jpg',
             }
+        } else {
+            return next();
         }
         const planet = new Planet(data);
         response.render('planet', planet);
     },
+    notFound: (request, response) => {
+        response.status(404).json('Ce endpoint n\'existe pas');
+    }
 }
 
 module.exports = controller;
