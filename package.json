@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/yassir-abid/PLANETS#readme",
   "dependencies": {
+    "@vercel/node": "^2.5.13",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "pug": "^3.0.2",
