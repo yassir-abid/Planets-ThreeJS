@@ -18,6 +18,8 @@ class Planet {
     constructor(param: Param) {
         this.color = param.color;
         this.size = param.size;
+        // fix this value using bind
+        this.redraw = this.redraw.bind(this);
     }
 
     draw() {
@@ -40,6 +42,27 @@ class Planet {
         this.scene.add(this.light);
 
         this.renderer.render(this.scene, this.camera);
+        this.redraw();
+    }
+
+    getTime(): number {
+        return Date.now() / 1000;
+    }
+
+    redraw() {
+        // move the camera to see the scene from another point of view
+        const time = this.getTime();
+        this.camera.position.x = Math.cos(time) * 15;
+        this.camera.position.z = Math.sin(time) * 15;
+
+        // look at the center of the planet
+        this.camera.lookAt(this.sphere.position);
+
+        // redraw the scene in the canvas
+        this.renderer.render(this.scene, this.camera);
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+        requestAnimationFrame(this.redraw);
     }
 
     calculScreenRatio(): number {

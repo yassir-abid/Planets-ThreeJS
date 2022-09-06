@@ -35974,6 +35974,8 @@ var Planet = /** @class */ (function () {
     function Planet(param) {
         this.color = param.color;
         this.size = param.size;
+        // fix this value using bind
+        this.redraw = this.redraw.bind(this);
     }
     Planet.prototype.draw = function () {
         this.scene = new THREE.Scene();
@@ -35991,6 +35993,22 @@ var Planet = /** @class */ (function () {
         this.light.position.set(-50, 50, 50);
         this.scene.add(this.light);
         this.renderer.render(this.scene, this.camera);
+        this.redraw();
+    };
+    Planet.prototype.getTime = function () {
+        return Date.now() / 1000;
+    };
+    Planet.prototype.redraw = function () {
+        // move the camera to see the scene from another point of view
+        var time = this.getTime();
+        this.camera.position.x = Math.cos(time) * 15;
+        this.camera.position.z = Math.sin(time) * 15;
+        // look at the center of the planet
+        this.camera.lookAt(this.sphere.position);
+        // redraw the scene in the canvas
+        this.renderer.render(this.scene, this.camera);
+        // https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+        requestAnimationFrame(this.redraw);
     };
     Planet.prototype.calculScreenRatio = function () {
         return window.innerWidth / window.innerHeight;
