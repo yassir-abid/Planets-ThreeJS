@@ -5,9 +5,9 @@ module.exports = class Planet {
     texture;
 
     constructor(data) {
-        this.title = `Planète ${data.title}`;
-        this.color = data.color;
-        this.size = data.size;
-        this.texture = data.texture;
+        this.title = `Planète ${data?.title}`;
+        this.color = data?.color;
+        this.size = data?.size;
+        this.texture = data?.texture;
     }
 }
