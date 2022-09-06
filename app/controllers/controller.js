@@ -1,6 +1,6 @@
 const controller = {
-    test: (request, response) => {
-        response.send('test');
+    home: (request, response) => {
+        response.render('home');
     },
 }
 
