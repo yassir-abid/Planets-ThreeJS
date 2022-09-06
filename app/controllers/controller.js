@@ -12,18 +12,21 @@ const controller = {
                 title: 'Terre',
                 color: 'rgb(0,100,255)',
                 size: 6,
+                texture: 'img/terre.jpeg',
             }
         } else if (searchedPlanet === 'mars') {
             data = {
                 title: 'Mars',
                 color: 'rgb(255,0,0)',
                 size: 4,
+                texture: 'img/mars.jpg',
             }
         } else if (searchedPlanet === 'venus') {
             data = {
                 title: 'Vénus',
                 color: 'rgb(0,200,50)',
                 size: 2,
+                texture: 'img/venus.jpg',
             }
         }
         const planet = new Planet(data);

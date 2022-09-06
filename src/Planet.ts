@@ -3,12 +3,14 @@ import * as THREE from 'three';
 interface Param {
     color: string,
     size: number,
+    texture: string,
 }
 
 class Planet {
 
     color: string;
     size: number;
+    texture: string;
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
     sphere: THREE.Mesh;
@@ -18,11 +20,12 @@ class Planet {
     constructor(param: Param) {
         this.color = param.color;
         this.size = param.size;
+        this.texture = param.texture;
         // fix this value using bind
         this.redraw = this.redraw.bind(this);
     }
 
-    draw() {
+    async draw() {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(45, this.calculScreenRatio(), 1, 1000);
         this.camera.position.z = 15;
@@ -33,7 +36,15 @@ class Planet {
         document.body.appendChild(this.renderer.domElement);
 
         const geometry = new THREE.SphereGeometry(this.size, 128, 64);
-        const material = new THREE.MeshLambertMaterial({ color: this.color });
+        let material: THREE.Material;
+        if (this.texture) {
+            const loader = new THREE.TextureLoader();
+            const texture = await loader.loadAsync(this.texture);
+            material = new THREE.MeshLambertMaterial({ map: texture });
+        }
+        else {
+            material = new THREE.MeshLambertMaterial({ color: this.color });
+        }
         this.sphere = new THREE.Mesh(geometry, material);
         this.scene.add(this.sphere);
 

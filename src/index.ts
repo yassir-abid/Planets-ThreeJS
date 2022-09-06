@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const planet = new Planet({
             color: data.color,
             size: Number(data.size),
+            texture: data.texture,
         });
         planet.draw();
     }
